@@ -73,7 +73,7 @@ namespace ChurchPlayer
             this.vlcControl.Dock = DockStyle.Fill;
             this.vlcControl.BeginInit();
             this.vlcControl.VlcLibDirectory = new DirectoryInfo(@currentDirectory);
-            this.vlcControl.VlcMediaplayerOptions = new string[] {"--directx-device={,display," + displayList[0].DeviceName + "}" };
+            this.vlcControl.VlcMediaplayerOptions = new string[] {"--directx-device={,display," + displayList[0].DeviceName + "} -vv" };
             // this.vlcControl.VlcMediaplayerOptions = new string[]{};
             this.vlcControl.EndInit();
            

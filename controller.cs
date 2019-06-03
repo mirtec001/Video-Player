@@ -29,12 +29,14 @@ namespace ChurchPlayer
             this.Text = "Church Video Player";
             this.IsMdiContainer = true;
             Panel panel = new Panel();
-            panel.Dock = DockStyle.Fill;
-
+            panel.Size = new Size(this.Width, this.Height);
+            panel.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
+            
             hasPlayed = false;
 
             lb = new ListBox();
             lb.Size = new Size(380, 325);
+            lb.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
             
             // Read media files in to the ListBox
             working_directory = Directory.GetCurrentDirectory() + "\\media";
@@ -54,21 +56,25 @@ namespace ChurchPlayer
             Button play = new Button();
             play.Location = new Point(10, 330);
             play.Text = "Play";
+            play.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
             play.Click += new EventHandler(play_clicked);
 
             Button stop = new Button();
             stop.Location = new Point(85, 330);
             stop.Text = "Stop";
+            stop.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
             stop.Click += new EventHandler(stop_clicked);
 
             Button pause = new Button();
             pause.Location = new Point(160, 330);
             pause.Text = "Pause";
+            pause.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
             pause.Click += new EventHandler(pause_clicked);
 
             Button close = new Button();
             close.Location = new Point(235, 330);
             close.Text = "Close";
+            close.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
             close.Click += new EventHandler(close_clicked);
 
             panel.Controls.Add(lb);
@@ -77,6 +83,20 @@ namespace ChurchPlayer
             panel.Controls.Add(pause);
             panel.Controls.Add(close);
             this.Controls.Add(panel);
+        }
+
+        private void PanelOnResize(object obj, EventArgs e)
+        {
+            ((Panel) obj).Invalidate();
+        }
+        private void PanelOnPaint(object obj, PaintEventArgs pea)
+        {
+            Panel panel = (Panel) obj;
+            Graphics gfx = pea.Graphics;
+
+            panel.Width = this.Width;
+            panel.Height = this.Height;
+
         }
         private void close_clicked(object sender, EventArgs e)
         {
